@@ -33,6 +33,17 @@ public abstract class GenericDao<T> {
         }
     }
 
+    public void atualizar(T entity) {
+        try {
+            em.getTransaction().begin();
+            em.merge(entity);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new DataAccessException("Erro ao atualizar a entidade: " + entity.getClass().getSimpleName(), e);
+        }
+    }
+
     public void excluir(T entity){
         try{
             em.getTransaction().begin(); // Inicia a transação

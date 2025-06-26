@@ -14,7 +14,7 @@ public class RegistroOcorrencia {
     private Long idRegistroOcorrencia;
 
     private LocalDateTime dataHora;
-    private String nomeObservador;
+    private String observador;
     private double latitude;
     private double longitude;
 
@@ -29,9 +29,9 @@ public class RegistroOcorrencia {
     public RegistroOcorrencia() {
     }
 
-    public RegistroOcorrencia(LocalDateTime dataHora, String nomeObservador, double latitude, double longitude, Habitat habitat, Especie especie) {
+    public RegistroOcorrencia(LocalDateTime dataHora, String observador, double latitude, double longitude, Habitat habitat, Especie especie) {
         this.dataHora = dataHora;
-        this.nomeObservador = nomeObservador;
+        this.observador = observador;
         this.latitude = latitude;
         this.longitude = longitude;
         this.habitat = habitat;

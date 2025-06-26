@@ -15,19 +15,6 @@ public class EspecieDao extends GenericDao<Especie> {
 
 
     // Metodo para buscar animal por nome cientifico.
-
-    public List<Especie> buscaPorId(int idEspecie) {
-        try{
-            String jpql = "SELECT c FROM Especie c WHERE c.idEspecie = :idEspecie";
-
-            return em.createQuery(jpql, Especie.class)
-                    .setParameter("idEspecie", idEspecie)
-                    .getResultList();
-        } catch (Exception e){
-            throw new DataAccessException("Erro ao buscar categorias por id: " + idEspecie, e);
-        }
-    }
-
     public List<Especie> buscarPorNome(String nomeCientifico) {
         try{
             // Consulta JPQL para buscar categorias por nome.

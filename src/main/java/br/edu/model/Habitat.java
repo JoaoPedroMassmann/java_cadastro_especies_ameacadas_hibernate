@@ -27,6 +27,50 @@ public class Habitat {
         this.bioma = bioma;
     }
 
+    public Long getIdHabitat() {
+        return idHabitat;
+    }
+
+    public String getRegiao() {
+        return regiao;
+    }
+
+    public void setRegiao(String regiao) {
+        this.regiao = regiao;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getBioma() {
+        return bioma;
+    }
+
+    public void setBioma(String bioma) {
+        this.bioma = bioma;
+    }
+
     @Override
     public String toString() {
         return "Habitat{" +

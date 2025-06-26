@@ -1,9 +1,13 @@
 package br.edu;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import br.edu.enums.EstadoConservacaoEnum;
+import br.edu.model.Especie;
+import br.edu.model.Habitat;
+import br.edu.service.HabitatService;
+import jakarta.persistence.*;
+import br.edu.service.EspecieService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -13,6 +17,10 @@ public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PostgresPU");
         em = emf.createEntityManager();
+
+        EspecieService especieService = new EspecieService(em);
+        HabitatService habitatService = new HabitatService(em);
+
 
         boolean continuar = true;
 
@@ -41,13 +49,156 @@ public class Main {
             scanner.nextLine(); // Limpar o buffer
 
             switch (opcao) {
+                case 1 -> cadastrarEspecie(especieService);
+                case 2 -> alterarEspecie(especieService);
+                case 3 -> excluirEspecie(especieService);
+                case 4 -> consultarEspeciePorId(especieService);
+                case 5 ->
+                case 6 -> listarEspecies(especieService);
+                case 7 -> cadastrarHabitat(habitatService);
+                case 8 ->
+                case 9 ->
+                case 10 ->
+                case 11 ->
+                case 12 ->
+                case 13 ->
+                case 14 ->
+                case 15 ->
+                case 16 ->
+                case 17 ->
+                case 18 ->
+                case 19 ->
+                case 20 ->
                 case 0 -> continuar = false;
                 default -> System.out.println("Opção inválida!");
             }
-        }
 
-        em.close();
-        emf.close();
-        System.out.println("Programa encerrado.");
+            em.close();
+            emf.close();
+            System.out.println("Programa encerrado.");
+        }
+    }
+
+    private static void cadastrarEspecie(EspecieService especieService) {
+        System.out.print("Digite o nome comum: ");
+        String nomeComum = scanner.nextLine();
+        System.out.print("Digite o nome cientifico: ");
+        String nomeCientifico = scanner.nextLine();
+        System.out.print("Digite o reino da especie: ");
+        String reino = scanner.nextLine();
+        System.out.print("Digite o filo da especie: ");
+        String filo = scanner.nextLine();
+        System.out.print("Digite a classe da especie: ");
+        String classe = scanner.nextLine();
+        System.out.print("Digite a ordem da especie: ");
+        String ordem = scanner.nextLine();
+        System.out.print("Digite a familia da especie: ");
+        String familia = scanner.nextLine();
+        System.out.print("Digite o genero da especie: ");
+        String genero = scanner.nextLine();
+        System.out.print("Digite o reino da especie: ");
+
+        Especie especie = new Especie(nomeComum, nomeCientifico, reino, filo, classe, ordem, familia, genero, numPopulacao);
+        especieService.inserir(especie);
+        System.out.println("Especie cadastrada com sucesso!");
+    }
+
+    private static void alterarEspecie(EspecieService especieService) {
+        System.out.print("Digite o ID da especie a ser alterada: ");
+        Long id = scanner.nextLong();
+        scanner.nextLine();
+        Especie especie = especieService.buscarEspeciePorId(id);
+        if (especie != null) {
+            System.out.print("Digite o novo comum: ");
+            especie.setNomeComum(scanner.nextLine());
+            System.out.print("Digite o nome cientifico: ");
+            especie.setNomeCientifico(scanner.nextLine());
+            System.out.print("Digite o reino da especie: ");
+            especie.setReino(scanner.nextLine());
+            System.out.print("Digite o filo da especie: ");
+            especie.setFilo(scanner.nextLine());
+            System.out.print("Digite a classe da especie: ");
+            especie.setClasse(scanner.nextLine());
+            System.out.print("Digite a ordem da especie: ");
+            especie.setOrdem(scanner.nextLine());
+            System.out.print("Digite a familia da especie: ");
+            especie.setFamilia(scanner.nextLine());
+            System.out.print("Digite o genero da especie: ");
+            especie.setGenero(scanner.nextLine());
+            System.out.print("Digite o reino da especie: ");
+            especie.setNumPopulacao(scanner.nextInt());
+            especieService.alterar(especie);
+            System.out.println("Especie alterada com sucesso!");
+        } else {
+            System.out.println("Especie não encontrada.");
+        }
+    }
+
+    private static void excluirEspecie(EspecieService especieService) {
+        System.out.print("Digite o ID da especie a ser excluída: ");
+        Long id = scanner.nextLong();
+        scanner.nextLine();
+        Especie especie = especieService.buscarEspeciePorId(id);
+        if (especie != null) {
+            especieService.excluir(especie);
+            System.out.println("Especie excluída com sucesso!");
+        } else {
+            System.out.println("Especie não encontrada.");
+        }
+    }
+
+    private static void consultarEspeciePorId(EspecieService especieService) {
+        System.out.print("Digite o ID da especie: ");
+        Long id = scanner.nextLong();
+        scanner.nextLine();
+        Especie especie = especieService.buscarEspeciePorId(id);
+        System.out.println(especie != null ? especie.toString() : "Especie não encontrada.");
+    }
+
+    private static void listarEspecies(EspecieService especieService) {
+        List<Especie> especies = especieService.buscarTodasAsEspecies();
+        especies.forEach(System.out::println);
+    }
+
+    private static void cadastrarHabitat(HabitatService habitatService) {
+        System.out.print("Digite o nome da regiao do habitat: ");
+        String regiao = scanner.nextLine();
+        System.out.print("Digite o estado do habitat: ");
+        String estado = scanner.nextLine();
+        System.out.print("Digite a latitude do habitat: ");
+        Long latitude = scanner.nextLong();
+        System.out.print("Digite a longitude do habitat: ");
+        Long longitude = scanner.nextLong();
+        System.out.print("Digite o bioma do habitat: ");
+        String bioma = scanner.nextLine();
+        System.out.print("Digite a ordem da especie: ");
+
+
+        Habitat habitat = new Habitat(regiao, estado, latitude, longitude, bioma);
+        habitatService.inserir(habitat);
+        System.out.println("Especie cadastrada com sucesso!");
+    }
+
+    private static void alterarHabitat(HabitatService habitatService) {
+        System.out.print("Digite o ID do habitat a ser alterada: ");
+        Long id = scanner.nextLong();
+        scanner.nextLine();
+        Habitat habitat = habitatService.buscarHabitatPorID(id);
+        if (habitat != null) {
+            System.out.print("Digite o nome da regiao do habitat: ");
+            habitat.setRegiao(scanner.nextLine());
+            System.out.print("Digite o estado do habitat: ");
+            habitat.set(scanner.nextLine());
+            System.out.print("Digite o reino da especie: ");
+            habitat.setReino(scanner.nextLine());
+            System.out.print("Digite o filo da especie: ");
+            habitat.setFilo(scanner.nextLine());
+            System.out.print("Digite a classe da especie: ");
+            habitat.setClasse(scanner.nextLine());
+            System.out.println("Especie alterada com sucesso!");
+            habitatService.alterar(habitat);
+        } else {
+            System.out.println("Especie não encontrada.");
+        }
     }
 }

@@ -10,21 +10,29 @@ public class Habitat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idHabitat;
 
+    @Column(nullable = false, length = 100)
     private String regiao;
+    @Column(nullable = false, length = 100)
     private String estado;
+    @Column(nullable = false)
     private double latitude;
+    @Column(nullable = false)
     private double longitude;
+    @Column(nullable = false, length = 100)
     private String bioma;
+    @Column(nullable = false)
+    private double extensao;
 
     public Habitat() {
     }
 
-    public Habitat(String regiao, String estado, double latitude, double longitude, String bioma) {
+    public Habitat(String regiao, String estado, double latitude, double longitude, String bioma, double extensao) {
         this.regiao = regiao;
         this.estado = estado;
         this.latitude = latitude;
         this.longitude = longitude;
         this.bioma = bioma;
+        this.extensao = extensao;
     }
 
     public Long getIdHabitat() {
@@ -71,6 +79,14 @@ public class Habitat {
         this.bioma = bioma;
     }
 
+    public double getExtensao() {
+        return extensao;
+    }
+
+    public void setExtensao(double extensao) {
+        this.extensao = extensao;
+    }
+
     @Override
     public String toString() {
         return "Habitat{" +
@@ -79,6 +95,8 @@ public class Habitat {
                 ", estado='" + estado + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
+                ", bioma='" + bioma + '\'' +
+                ", extensao=" + extensao +
                 '}';
     }
 }

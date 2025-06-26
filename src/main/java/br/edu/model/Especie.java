@@ -11,14 +11,23 @@ public class Especie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEspecie;
 
+    @Column(nullable = false, length = 100)
     private String nomeComum;
+    @Column(nullable = false, length = 100)
     private String nomeCientifico;
+    @Column(nullable = false, length = 100)
     private String reino;
+    @Column(nullable = false, length = 100)
     private String filo;
+    @Column(nullable = false, length = 100)
     private String classe;
+    @Column(nullable = false, length = 100)
     private String ordem;
+    @Column(nullable = false, length = 100)
     private String familia;
+    @Column(nullable = false, length = 100)
     private String genero;
+
     private int numPopulacao;
 
     @Enumerated(EnumType.STRING)

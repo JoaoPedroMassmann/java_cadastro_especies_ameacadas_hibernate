@@ -29,6 +29,10 @@ public class EspecieService {
         return especieDao.buscarPorId(id);
     }
 
+    public Especie buscarEspeciePorNomeCientifico(String nomeCientifico) {
+        return especieDao.buscarPorNomeCientifico(nomeCientifico);
+    }
+
     public List<Especie> buscarTodasAsEspecies() {
         return especieDao.buscarTodos();
     }

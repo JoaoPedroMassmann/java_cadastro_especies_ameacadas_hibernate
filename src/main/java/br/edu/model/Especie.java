@@ -13,7 +13,7 @@ public class Especie {
 
     @Column(nullable = false, length = 100)
     private String nomeComum;
-    @Column(nullable = false, length = 100, unique = true)
+    @Column(nullable = false, length = 100)
     private String nomeCientifico;
     @Column(nullable = false, length = 100)
     private String reino;

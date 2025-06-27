@@ -66,7 +66,7 @@ public class Main {
                 case 10 -> consultarHabitatPorId(habitatService);
                 case 11 -> listarHabitats(habitatService);
                 case 12 -> cadastrarRegistroDeOcorrencia(registroOcorrenciaService, habitatService, especieService);
-                case 13 -> alterarRegistroOcorrencia(registroOcorrenciaService);
+                case 13 -> System.out.println("Funcionalidade ainda não implementada.");
                 case 14 -> System.out.println("Funcionalidade ainda não implementada.");
                 case 15 -> System.out.println("Funcionalidade ainda não implementada.");
                 case 16 -> System.out.println("Funcionalidade ainda não implementada.");
@@ -185,13 +185,6 @@ public class Main {
         System.out.println(especie != null ? especie.toString() : "Especie não encontrada.");
     }
 
-    private static void consultarEspeciePorNomeCientifico(EspecieService especieService) {
-        System.out.print("Digite o nome científico da espécie: ");
-        String nomeCientifico = scanner.nextLine();
-        Especie especie = especieService.buscarEspeciePorNomeCientifico(nomeCientifico);
-        System.out.println(especie != null ? especie.toString() : "Espécie não encontrada.");
-    }
-
     private static void listarEspecies(EspecieService especieService) {
         List<Especie> especies = especieService.buscarTodasAsEspecies();
         especies.forEach(System.out::println);
@@ -206,10 +199,12 @@ public class Main {
         double latitude = scanner.nextDouble();
         System.out.print("Digite a longitude do habitat: ");
         double longitude = scanner.nextDouble();
-        System.out.print("Digite o bioma do habitat: ");
-        String bioma = scanner.nextLine();
         System.out.print("Digite a extensao do habitat: ");
         double extensao = scanner.nextDouble();
+        System.out.print("Digite o bioma do habitat: ");
+        String bioma = scanner.nextLine();
+        System.out.print("Digite a ordem da especie: ");
+
 
         Habitat habitat = new Habitat(regiao, estado, latitude, longitude, bioma, extensao);
         habitatService.inserir(habitat);
@@ -224,22 +219,16 @@ public class Main {
         if (habitat != null) {
             System.out.print("Digite o nome da regiao do habitat: ");
             habitat.setRegiao(scanner.nextLine());
-
             System.out.print("Digite o estado do habitat: ");
             habitat.setEstado(scanner.nextLine());
-
             System.out.print("Digite a latitude do habitat: ");
             habitat.setLatitude(scanner.nextDouble());
-
             System.out.print("Digite a longitude do habitat: ");
             habitat.setLongitude(scanner.nextDouble());
-
             System.out.print("Digite a extensao do habitat: ");
             habitat.setExtensao(scanner.nextDouble());
-
             System.out.print("Digite o bioma do habitat: ");
             habitat.setBioma(scanner.nextLine());
-
             habitatService.alterar(habitat);
             System.out.println("Habitat alterada com sucesso!");
 
@@ -278,13 +267,10 @@ public class Main {
         System.out.print("Digite a data e hora do registro (formato yyyy-MM-ddTHH:mm): ");
         String dataHoraString = scanner.nextLine();
         LocalDateTime dataHora = LocalDateTime.parse(dataHoraString);
-
         System.out.print("Digite o observador responsável pelo registro: ");
         String observador = scanner.nextLine();
-
         System.out.print("Digite a latitude do registro: ");
         double latitude = scanner.nextDouble();
-
         System.out.print("Digite a longitude do registro: ");
         Long longitude = scanner.nextLong();
 
@@ -298,7 +284,7 @@ public class Main {
             return;
         }
 
-        System.out.print("Digite o ID da Especie de Ocorrencia: ");
+        System.out.print("Digite o ID do Registro de Ocorrencia: ");
         Long idEspecie = scanner.nextLong();
         scanner.nextLine();
         Especie especie = especieService.buscarEspeciePorId(idEspecie);
@@ -310,51 +296,5 @@ public class Main {
         RegistroOcorrencia registroOcorrencia = new RegistroOcorrencia(dataHora, observador, latitude, longitude, habitat, especie);
         registroOcorrenciaService.inserir(registroOcorrencia);
         System.out.println("Registro de Ocorrencia com sucesso!");
-    }
-
-    private static void alterarRegistroOcorrencia(RegistroOcorrenciaService registroOcorrenciaService, HabitatService habitatService, EspecieService especieService) {
-        System.out.print("Digite o ID do habitat a ser alterada: ");
-        Long id = scanner.nextLong();
-        scanner.nextLine();
-        RegistroOcorrencia registroOcorrencia = registroOcorrenciaService.buscarRegistroOcorrenciaPorId(id);
-        if (registroOcorrencia != null) {
-            System.out.print("Digite a data e hora do registro (formato yyyy-MM-ddTHH:mm): ");
-            String dataHoraString = scanner.nextLine();
-            registroOcorrencia.setDataHora(LocalDateTime.parse(dataHoraString));
-            System.out.print("Digite o observador responsável pelo registro: ");
-            registroOcorrencia.setObservador(scanner.nextLine());
-            System.out.print("Digite a latitude do registro: ");
-            registroOcorrencia.setLatitude(scanner.nextDouble());
-            System.out.print("Digite a longitude do registro: ");
-            registroOcorrencia.setLongitude(scanner.nextDouble());
-
-            System.out.print("Digite o id do habitat do registro: ");
-            Long idHabitat = scanner.nextLong();
-            scanner.nextLine();
-            Habitat habitat = habitatService.buscarHabitatPorID(idHabitat);
-            if (habitat == null) {
-                System.out.println("Habitat informada nao encontrada.");
-                return;
-            } else {
-                registroOcorrencia.setHabitat(habitat);
-            }
-
-            System.out.print("Digite o ID da Especie: ");
-            Long idEspecie = scanner.nextLong();
-            scanner.nextLine();
-            Especie especie = especieService.buscarEspeciePorId(idEspecie);
-            if (especie == null) {
-                System.out.println("Especie informada nao encontrada.");
-                return;
-            } else {
-                registroOcorrencia.setEspecie(especie);
-            }
-
-            registroOcorrenciaService.alterar(registroOcorrencia);
-            System.out.println("Registro de Ocorrencia alterado com sucesso!");
-
-        } else {
-            System.out.println("Registro de Ocorrencia não encontrado.");
-        }
     }
 }

@@ -3,11 +3,12 @@ package br.edu.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "habitat")
+@Table(name = "habitats")
 public class Habitat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idHabitat")
     private Long idHabitat;
 
     @Column(nullable = false, length = 100)

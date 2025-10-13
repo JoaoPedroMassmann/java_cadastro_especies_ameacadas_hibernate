@@ -3,21 +3,21 @@ package br.edu.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "especies")
+@Table(name = "especieHabitat")
 public class EspecieHabitat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idEspecieHabitat")
     private long idEspecieHabitat;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "especieId")
+    @JoinColumn(name = "idEspecie", nullable = false)
     private Especie idEspecie;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "habitatId")
+    @JoinColumn(name = "idhabitat", nullable = false)
     private Habitat idHabitat;
 
-    @Column(nullable = false)
     private int populacao;
 
     public EspecieHabitat() {

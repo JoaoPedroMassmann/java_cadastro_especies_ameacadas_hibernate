@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "registroOcorrencia")
+@Table(name = "registrosOcorrencia")
 public class RegistroOcorrencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -91,5 +91,18 @@ public class RegistroOcorrencia {
 
     public void setEspecie(Especie especie) {
         this.especie = especie;
+    }
+
+    @Override
+    public String toString() {
+        return "RegistroOcorrencia{" +
+                "idRegistroOcorrencia=" + idRegistroOcorrencia +
+                ", dataHora=" + dataHora +
+                ", observador='" + observador + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                "habitatId=" + (habitat != null ? habitat.getIdHabitat() : "null") +
+                ", especieId=" + (especie != null ? especie.getIdEspecie() : "null") +
+                '}';
     }
 }

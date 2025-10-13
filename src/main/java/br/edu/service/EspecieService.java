@@ -1,5 +1,6 @@
 package br.edu.service;
 
+import br.edu.vo.RelatorioEspeciesEstadoVo;
 import jakarta.persistence.EntityManager;
 import br.edu.dao.EspecieDao;
 import br.edu.model.Especie;
@@ -35,5 +36,9 @@ public class EspecieService {
 
     public List<Especie> buscarTodasAsEspecies() {
         return especieDao.buscarTodos();
+    }
+
+    public List<RelatorioEspeciesEstadoVo> relatorioPorEstadoConservacao() {
+        return especieDao.gerarRelatorioEspeciesEstado();
     }
 }

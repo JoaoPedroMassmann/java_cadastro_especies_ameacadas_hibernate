@@ -12,8 +12,5 @@ public class HabitatDao extends GenericDao<Habitat> {
     public HabitatDao (EntityManager em) {
         super(em, Habitat.class);
     }
-
-
-
 }
 

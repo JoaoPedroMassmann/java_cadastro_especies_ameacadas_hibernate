@@ -1,0 +1,6 @@
+{
+  "modo" : "producao",
+  "idioma" : "pt-BR",
+  "diretorioRelatorios" : "relatoriosSerializados/",
+  "mensagemBoasVindas" : "Bem-vindo ao Sistema de Cadastro de Espécies Ameaçadas! Autor: João Pedro Massmann"
+}

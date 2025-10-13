@@ -2,8 +2,10 @@ package br.edu.service;
 
 import br.edu.dao.RegistroOcorrenciaDao;
 import br.edu.model.RegistroOcorrencia;
+import br.edu.vo.RelatorioOcorrenciaPeriodoVo;
 import jakarta.persistence.EntityManager;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class RegistroOcorrenciaService {
@@ -32,4 +34,21 @@ public class RegistroOcorrenciaService {
     public List<RegistroOcorrencia> buscarTodosOsRegistrosDeOcorrencia(){
         return registroOcorrenciaDao.buscarTodos();
     }
+
+    public List<RegistroOcorrencia> buscarRegistrosOcorrenciaPorObservador(String observador) {
+        return registroOcorrenciaDao.buscarRegistrosObservador(observador);
+    }
+
+    public List<RegistroOcorrencia> buscarRegistrosOcorrenciaPorEspecie(Long idEspecie) {
+        return registroOcorrenciaDao.buscarRegistrosEspecie(idEspecie);
+    }
+
+    public List<RegistroOcorrencia> buscarRegistrosOcorrenciaPorHabitat(Long idHabitat) {
+        return registroOcorrenciaDao.buscarRegistrosHabitat(idHabitat);
+    }
+
+    public List<RelatorioOcorrenciaPeriodoVo> relatorioPorPeriodo(LocalDate inicio, LocalDate fim) {
+        return registroOcorrenciaDao.listarOcorrenciasPorPeriodo(inicio, fim);
+    }
+
 }

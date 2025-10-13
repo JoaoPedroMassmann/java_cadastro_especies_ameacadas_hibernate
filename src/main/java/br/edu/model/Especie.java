@@ -11,23 +11,31 @@ public class Especie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEspecie;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "nomeComum", nullable = false, length = 100)
     private String nomeComum;
-    @Column(nullable = false, length = 100)
+
+    @Column(name = "nomeCientifico", nullable = false, length = 100)
     private String nomeCientifico;
+
     @Column(nullable = false, length = 100)
     private String reino;
+
     @Column(nullable = false, length = 100)
     private String filo;
+
     @Column(nullable = false, length = 100)
     private String classe;
+
     @Column(nullable = false, length = 100)
     private String ordem;
+
     @Column(nullable = false, length = 100)
     private String familia;
-    @Column(nullable = false, length = 100)
+
+    @Column(nullable = false, length=  100)
     private String genero;
 
+    @Column(name = "numPopulacao")
     private int numPopulacao;
 
     @Enumerated(EnumType.STRING)
@@ -132,5 +140,22 @@ public class Especie {
 
     public void setEstadoConservacao(EstadoConservacaoEnum estadoConservacao) {
         this.estadoConservacao = estadoConservacao;
+    }
+
+    @Override
+    public String toString() {
+        return "Especie{" +
+                "idEspecie=" + idEspecie +
+                ", nomeComum='" + nomeComum + '\'' +
+                ", nomeCientifico='" + nomeCientifico + '\'' +
+                ", reino='" + reino + '\'' +
+                ", filo='" + filo + '\'' +
+                ", classe='" + classe + '\'' +
+                ", ordem='" + ordem + '\'' +
+                ", familia='" + familia + '\'' +
+                ", genero='" + genero + '\'' +
+                ", numPopulacao=" + numPopulacao +
+                ", estadoConservacao=" + estadoConservacao +
+                '}';
     }
 }
